@@ -42,11 +42,25 @@ app.get('/pokemon', (req ,res) => {
     res.render('index.ejs', { pokemon: pokemon })
 });
 
+// NEW
+app.get('/pokemon/new', (req, res) => {
+    res.render('new.ejs');
+});
+
+app.post('/pokemon', (req, res) => {
+    pokemon.push(req.body);
+    // console.log(pokemon);
+    res.redirect('/pokemon');
+});
+
+
 app.get('/pokemon/:index', (req, res) => {
     res.render('show.ejs', {
         pokemon: pokemon[req.params.index]
-    })
+    });
 });
+
+
 
 // app.get('/pokemon/:index', (req, res) => {
 //     res.show(pokemon[req.params.index]);
