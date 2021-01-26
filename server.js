@@ -43,8 +43,14 @@ app.get('/pokemon', (req ,res) => {
 });
 
 app.get('/pokemon/:index', (req, res) => {
-    res.send(pokemon[req.params.index]);
+    res.render('show.ejs', {
+        pokemon: pokemon[req.params.index]
+    })
 });
+
+// app.get('/pokemon/:index', (req, res) => {
+//     res.show(pokemon[req.params.index]);
+// });
 
 app.listen(3000, () => {
     console.log("I'm listening")
