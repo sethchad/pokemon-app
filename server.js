@@ -32,8 +32,14 @@ const pokemon = [
     }
   ];
 
-app.get('/pokemon', (req, res) => {
-    res.send(pokemon);
+app.use(express.urlencoded({ extended: true }));
+
+// app.get('/pokemon', (req, res) => {
+//     res.send(pokemon); 
+// });
+
+app.get('/pokemon', (req ,res) => {
+    res.render('index.ejs', { pokemon: pokemon })
 });
 
 app.get('/pokemon/:index', (req, res) => {
