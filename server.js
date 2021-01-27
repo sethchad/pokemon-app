@@ -1,6 +1,13 @@
 const express = require('express');
 const app = express();
 
+// Adds the package needed for delete requests. Install the npm package "npm install method-override --save" in the folder.
+const methodOverride = require('method-override');
+
+
+// Delete using a query parameter named _method in the delete form
+app.use(methodOverride('_method'));
+
 const pokemon = [
     {
       name: "Bulbasaur",
@@ -39,7 +46,9 @@ app.use(express.urlencoded({ extended: true }));
 // });
 
 app.get('/pokemon', (req ,res) => {
-    res.render('index.ejs', { pokemon: pokemon })
+    res.render('index.ejs', { 
+        pokemon: pokemon 
+    })
 });
 
 // NEW
@@ -49,17 +58,31 @@ app.get('/pokemon/new', (req, res) => {
 
 app.post('/pokemon', (req, res) => {
     pokemon.push(req.body);
-    // console.log(pokemon);
     res.redirect('/pokemon');
 });
 
+// DELETE
+app.delete('/pokemon/:index', (req, res) => {
+    pokemon.splice(req.params.index, 1);
+    res.redirect('/pokemon')
+});
 
-app.get('/pokemon/:index', (req, res) => {
-    res.render('show.ejs', {
-        pokemon: pokemon[req.params.index]
+// EDIT
+app.get('/pokemon/:index/edit', (req, res) => {
+    res.render('edit.ejs', 
+    {
+        pokemon: pokemon[req.params.index],
+        index: req.params.index
     });
 });
 
+app.get('/pokemon/:index', (req, res) => {
+    res.render('show.ejs', 
+    {
+        pokemon: pokemon[req.params.index],
+        index: req.params.index
+    });
+});
 
 
 // app.get('/pokemon/:index', (req, res) => {
@@ -67,5 +90,5 @@ app.get('/pokemon/:index', (req, res) => {
 // });
 
 app.listen(3000, () => {
-    console.log("I'm listening")
+    console.log("I'm listening");
 });

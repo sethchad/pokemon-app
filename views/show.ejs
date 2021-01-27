@@ -13,6 +13,10 @@
         
         <img src=<%= pokemon.img %> alt=<%= pokemon.name %> > 
 
+        <form action="/pokemon/<%= index %>?_method=DELETE" method="POST">
+            <input type="submit" value="DELETE"/>
+        </form>
+
         <!--<script src="../server.js" async defer></script>-->
     </body>
 </html>
