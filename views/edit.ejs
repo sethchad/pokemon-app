@@ -8,9 +8,9 @@
     <body>
         <h1>Edit Pokemon Page</h1>
         <!--  NOTE: action will be the route, method will be the HTTP verb-->
-        <form action="/pokemon" method="POST">
-            Name: <input type="text" name="name" placeholder=<%= pokemon.name %>><br/>
-            Image URL: <input type="text" name="img" placeholder=<%= pokemon.img %>><br/>
+        <form action="/pokemon/<%= index %>?_method=PUT" method="POST">
+            Name: <input type="text" name="name" value=<%= pokemon.name %>><br/>
+            Image URL: <input type="text" name="img" value=<%= pokemon.img %>><br/>
             <input type="submit" name="" value="Update Pokemon"/>
         </form>
     </body>

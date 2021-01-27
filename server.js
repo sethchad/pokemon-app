@@ -76,6 +76,14 @@ app.get('/pokemon/:index/edit', (req, res) => {
     });
 });
 
+app.put('/pokemon/:index', (req, res) => {
+    pokemon[req.params.index] = req.body; 
+    console.log(pokemon)
+	res.redirect('/pokemon');
+});
+
+
+// SHOW
 app.get('/pokemon/:index', (req, res) => {
     res.render('show.ejs', 
     {
